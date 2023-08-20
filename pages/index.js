@@ -16,22 +16,23 @@ export default function Home() {
   const [blogsUser, setBlogsUser] = useState([]);
 
   useEffect(() => {
-    const fetchUserName = async () => {
-      const q = query(
-        collection(db, "users"),
-        where("email", "==", auth.currentUser.email)
-      );
-      const querySnapshot = await getDocs(q);
-      const userBlogList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setBlogsUser(userBlogList);
-    };
+  
 
-    fetchUserName();
-
+    
     if (auth.currentUser) {
+      const fetchUserName = async () => {
+        const q = query(
+          collection(db, "users"),
+          where("email", "==", auth.currentUser.email)
+          );
+          const querySnapshot = await getDocs(q);
+          const userBlogList = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setBlogsUser(userBlogList);
+          fetchUserName();
+      };
       const fetchUserBlogs = async () => {
         const q = query(
           collection(db, "Blog"),
@@ -73,11 +74,11 @@ export default function Home() {
         )}
       </div>
       {!user ? (
-        <div className=" h-screen">
+        <div className=" h-full bg-slate-200">
           <h2 className="pl-56 font-bold">All Blogs</h2>
           {allBlogs.map((blog) => (
             <div className="mt-5 bg-slate-200">
-              {" "}
+             
               <HomeBlogs
                 key={blog.id}
                 title={blog.title}

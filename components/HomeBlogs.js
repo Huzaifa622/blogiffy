@@ -1,6 +1,8 @@
 import { auth, db } from '@/utils/firebase';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image';
+
 
 const HomeBlogs = (props) => {
   
@@ -13,7 +15,7 @@ const HomeBlogs = (props) => {
             <h2 className="text-xl font-semibold text-gray-800">{props.title}</h2>
             <p className="mt-2 text-gray-600">{props.description}</p>
             <div className="flex items-center mt-4">
-              <img
+              <Image
                 className="w-10 h-10 rounded-full mr-2"
                 src={props.photo}
                 width={40}

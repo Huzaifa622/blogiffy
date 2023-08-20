@@ -1,6 +1,8 @@
 import { useAuthContext, userAuthContext } from "@/context/AuthContext";
 import { auth } from "@/utils/firebase";
 import Link from "next/link";
+import Image from 'next/image';
+
 import React from "react";
 
 const Navbar = () => {
@@ -24,7 +26,7 @@ const Navbar = () => {
         </>
       ) : (
         <>
-        <img src={auth.currentUser.photoURL} width={30} className="pr-2 rounded-full"/>
+        <Image src={auth.currentUser.photoURL} width={30} className="pr-2 rounded-full"/>
           <div className="pr-6">{auth.currentUser.email}</div>
           <div className="cursor-pointer" onClick={handleSignOut}>
             Signout
