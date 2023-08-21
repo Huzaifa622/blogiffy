@@ -15,10 +15,11 @@ const HomeBlogs = (props) => {
             <h2 className="text-xl font-semibold text-gray-800">{props.title}</h2>
             <p className="mt-2 text-gray-600">{props.description}</p>
             <div className="flex items-center mt-4">
-              <Image
+              <img
                 className="w-10 h-10 rounded-full mr-2"
                 src={props.photo}
                 width={40}
+                height={40}
               />
               <div>
                 <p className="text-sm font-medium text-gray-900">{props.authorname}</p>

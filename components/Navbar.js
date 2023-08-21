@@ -26,7 +26,7 @@ const Navbar = () => {
         </>
       ) : (
         <>
-        <Image src={auth.currentUser.photoURL} width={30} className="pr-2 rounded-full"/>
+        <img src={auth.currentUser.photoURL} width={30} height={30} className="pr-2 rounded-full"/>
           <div className="pr-6">{auth.currentUser.email}</div>
           <div className="cursor-pointer" onClick={handleSignOut}>
             Signout

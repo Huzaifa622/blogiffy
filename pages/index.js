@@ -16,23 +16,20 @@ export default function Home() {
   const [blogsUser, setBlogsUser] = useState([]);
 
   useEffect(() => {
-  
-
-    
     if (auth.currentUser) {
-      const fetchUserName = async () => {
-        const q = query(
-          collection(db, "users"),
-          where("email", "==", auth.currentUser.email)
-          );
-          const querySnapshot = await getDocs(q);
-          const userBlogList = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setBlogsUser(userBlogList);
-          fetchUserName();
-      };
+      //   const fetchUserName = async () => {
+      //     const q = query(
+      //       collection(db, "users"),
+      //       where("email", "==", auth.currentUser.email)
+      //       );
+      //       const querySnapshot = await getDocs(q);
+      //       const userBlogList = querySnapshot.docs.map((doc) => ({
+      //         id: doc.id,
+      //         ...doc.data(),
+      //       }));
+      //       setBlogsUser(userBlogList);
+      //       fetchUserName();
+      // };
       const fetchUserBlogs = async () => {
         const q = query(
           collection(db, "Blog"),
@@ -43,23 +40,24 @@ export default function Home() {
           id: doc.id,
           ...doc.data(),
         }));
+        console.log(userBlogList)
         setBlogs(userBlogList);
       };
-
       fetchUserBlogs();
-    } else {
-      const fetchBlogs = async () => {
-        const blogsCollectionRef = collection(db, "Blog");
-        const querySnapshot = await getDocs(blogsCollectionRef);
-        const blogList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setAllBlogs(blogList);
-      };
+    
+     } 
+    const fetchBlogs = async () => {
+      const blogsCollectionRef = collection(db, "Blog");
+      const querySnapshot = await getDocs(blogsCollectionRef);
+      const blogList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setAllBlogs(blogList);
+    };
 
-      fetchBlogs();
-    }
+    fetchBlogs();
+    
   });
   const { user } = userAuthContext();
   return (
@@ -78,20 +76,16 @@ export default function Home() {
           <h2 className="pl-56 font-bold">All Blogs</h2>
           {allBlogs.map((blog) => (
             <div className="mt-5 bg-slate-200">
-             
               <HomeBlogs
                 key={blog.id}
                 title={blog.title}
                 description={blog.description}
                 authorname={
-                  blog.author.name ||
-                  blogsUser.map((user) => {
-                    user.name;
-                  })
+                  blog.author.name
                 }
                 date={blog.date}
                 id={blog.id}
-                photo={blog.photo}
+                photo={blog.author.photo}
               />
             </div>
           ))}
@@ -107,15 +101,13 @@ export default function Home() {
                     title={blog.title}
                     description={blog.description}
                     authorname={
-                      blog.author.name ||
-                      blogsUser.map((user) => {
-                        user.name;
-                      })
+                      blog.author.name
                     }
                     date={blog.date}
                     id={blog.id}
-                    photo={blog.photo}
+                    photo={blog.author.photo}
                   />
+                  
                 </div>
               ))}
             </div>

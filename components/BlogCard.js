@@ -8,6 +8,7 @@ const BlogCard = (props) => {
     const handleDelete = async()=>{
         await deleteDoc(doc(db, "Blog" , props.id ));
     }
+    // console.log(props.photo)
    const formatDate =  new Date(props.date.seconds * 1000).toLocaleString();
     return (
 
@@ -17,11 +18,12 @@ const BlogCard = (props) => {
             <h2 className="text-xl font-semibold text-gray-800">{props.title}</h2>
             <p className="mt-2 text-gray-600">{props.description}</p>
             <div className="flex items-center mt-4">
-              <Image
+              <img
                 className="w-10 h-10 rounded-full mr-2"
                 src={props.photo}
                 alt='pic'
-                width={40}
+                width={20}
+                height={20}
               />
               <div>
                 <p className="text-sm font-medium text-gray-900">{props.authorname}</p>
