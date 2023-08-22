@@ -6,7 +6,8 @@ import Image from 'next/image';
 
 const HomeBlogs = (props) => {
   
-   const formatDate =  new Date(props.date.seconds * 1000).toLocaleString();
+   const formatDate =  new Date(props.date).toLocaleString();
+   console.log(formatDate)
     return (
 
         <div className="w-[80%] ml-12 mt-0 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
