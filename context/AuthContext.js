@@ -7,8 +7,9 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "@/utils/firebase";
+import { auth, database } from "@/utils/firebase";
 import { async } from "@firebase/util";
+import { ref, set } from "firebase/database";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -29,14 +30,11 @@ export const AuthContextProvider = ({ children }) => {
         password
       );
 
-      // Create a reference to the user's document within the "users" collection
-      const userDocRef = doc(db, "users", authUser.user.uid);
-
-      // Set the user's data using the setDoc function
-      await setDoc(userDocRef, {
-        username,
-        // other user data...
-      });
+      set(ref(database , 'users/'+ auth.currentUser.uid),{
+         email, 
+         username,
+      })
+      console.log('success')
     } catch (error) {
       // Handle error
     }

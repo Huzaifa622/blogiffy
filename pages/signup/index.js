@@ -1,5 +1,5 @@
 import { userAuthContext } from "@/context/AuthContext";
-import { auth, db } from "@/utils/firebase";
+import { auth, database, db } from "@/utils/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -35,13 +35,6 @@ export default function SignUp() {
     }
     setErr(false);
     await signup(emailRef.current.value, passwordRef.current.value , username);
-    const userDocRef = doc(db, 'users', auth.currentUser.uid);
-    await setDoc(userDocRef, {
-    
-      name: username,
-      email: emailRef.current.value
-      // Other user-related data you might want to store
-    });
     router.push("/");
   };
   return (
@@ -151,7 +144,7 @@ export default function SignUp() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>

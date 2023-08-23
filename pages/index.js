@@ -38,17 +38,6 @@ export default function Home(props) {
       };
       fetchUserBlogs();
     }
-    // const fetchBlogs = async () => {
-    //   const blogsCollectionRef = collection(db, "Blog");
-    //   const querySnapshot = await getDocs(blogsCollectionRef);
-    //   const blogList = querySnapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-    //   setAllBlogs(blogList);
-    // };
-
-    // fetchBlogs();
   });
 
   return (
@@ -63,10 +52,10 @@ export default function Home(props) {
         )}
       </div>
       {!user ? (
-        <div className=" h-full bg-slate-200">
-          <h2 className="pl-56 font-bold">All Blogs</h2>
+        <div className=" h-full bg-slate-200 ">
+          <h2 className="pl-56 font-bold p-4 text-lg">All Blogs</h2>
           {blogList.map((blog) => (
-            <Link href={`/${blog.id}`} className="mt-5 h-full bg-slate-200">
+            <Link href={`/${blog.id}`} className=" h-full bg-slate-200 mt-4">
               <HomeBlogs
                 key={blog.id}
                 title={blog.title}
