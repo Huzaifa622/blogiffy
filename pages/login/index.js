@@ -22,7 +22,8 @@ export default function SignUp() {
   const emailRef = useRef()
   const passwordRef = useRef();
   const {login } = userAuthContext();
-  const handleLogin = async() =>{
+  const handleLogin = async(e) =>{
+    e.preventDefault();
 await login(emailRef.current.value , passwordRef.current.value);
 router.push('/')
   }

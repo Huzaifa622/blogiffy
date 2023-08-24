@@ -6,7 +6,7 @@ import Image from "next/image";
 import React from "react";
 
 const Navbar = () => {
-  const { user, googleSignIn, logOut } = userAuthContext();
+  const { user , userData, googleSignIn, logOut } = userAuthContext();
   const handleSignIn = async () => {
     await googleSignIn();
   };
@@ -70,12 +70,12 @@ const Navbar = () => {
         ) : (
           <>
             <img
-              src={auth.currentUser.photoURL}
-              width={30}
+              src={auth.currentUser.photoURL || (userData && userData.imageUrl)}
+              width={40}
               height={30}
               className="p-2 rounded-full"
             />
-            <div className="p-2">{auth.currentUser.displayName}</div>
+            <div className="p-2">{auth.currentUser.displayName || (userData && userData.username)}</div>
             <div className="cursor-pointer p-2" onClick={handleSignOut}>
               Signout
             </div>

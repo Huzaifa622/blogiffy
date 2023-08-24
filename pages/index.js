@@ -19,7 +19,8 @@ export default function Home(props) {
   const [blogs, setBlogs] = useState([]);
   const [allBlogs, setAllBlogs] = useState([]);
   const [blogsUser, setBlogsUser] = useState([]);
-  const { user } = userAuthContext();
+  const { user , userData } = userAuthContext();
+  console.log(userData)
 
   useEffect(() => {
     if (user) {
@@ -70,7 +71,7 @@ export default function Home(props) {
         </div>
       ) : (
         <div>
-          <div className="w-[100%] pt-8 bg-slate-200 mb-4 h-screen ">
+          <div className="w-[100%] pt-8 bg-slate-200 mb-4 h-full ">
           <Card />
           {blogs.map((blog) => (
             <UserBlog
@@ -78,7 +79,7 @@ export default function Home(props) {
               description={blog.description}
               authorname={blog.author.name}
               id={blog.id}
-              photo={blog.author.photo}
+              photo={blog.author.photo }
               date={blog.date}
             />
           ))}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 
+
 /*
   This example requires some changes to your config:
   
@@ -22,10 +23,13 @@ import { useRef, useState } from "react";
 export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const imageRef = useRef();
   const [username, setUsername] = useState();
   const passwordConfirmRef = useRef();
+  const [userImage , setUserImage] = useState();
+  const [image , setImage] = useState();
   const [err, setErr] = useState("");
-  const { signup } = userAuthContext();
+  const { signup, uploadImage } = userAuthContext();
   const router = useRouter();
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -34,9 +38,18 @@ export default function SignUp() {
       return setErr("password not match");
     }
     setErr(false);
-    await signup(emailRef.current.value, passwordRef.current.value , username);
+    await signup(emailRef.current.value, passwordRef.current.value , username , userImage);
     router.push("/");
   };
+  const handleImage = (e) =>{
+    const file = e.target.files[0];
+    if(file){
+      const imageURL = URL.createObjectURL(file);
+      setImage(imageURL)
+    }
+
+    setUserImage(file)
+  }
   return (
     <>
       {/*
@@ -56,6 +69,21 @@ export default function SignUp() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" onSubmit={handleSignup}>
+                  <div>
+              <div className="mt-2 ">
+                <div className="w-full items-center flex justify-center">
+                <img className="w-[6rem] border rounded-full " src={image || '/pro.png'} alt="/pro.png" />
+                </div>
+                <input
+                  // id="image"
+                  // name="image"
+                  type="file"
+                  accept={"image/*"}
+                  onChange={handleImage}
+                  className="block "
+                />
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="email"
@@ -75,6 +103,7 @@ export default function SignUp() {
                 />
               </div>
             </div>
+      
             <div>
               <label
                 htmlFor="username"
@@ -119,7 +148,7 @@ export default function SignUp() {
             <div>
               <div className="flex items-center justify-between">
                 <label
-                  htmlFor="password"
+                  htmlFor="confirmPassword"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Confirm Password
@@ -127,9 +156,9 @@ export default function SignUp() {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="confirmPassword"
                   ref={passwordConfirmRef}
                   autoComplete="current-password"
                   required
