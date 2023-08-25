@@ -156,9 +156,9 @@ export default function SignUp() {
               </div>
               <div className="mt-2">
                 <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="confirmPassword"
+                  id="password"
+                  name="password"
+                  type="password"
                   ref={passwordConfirmRef}
                   autoComplete="current-password"
                   required

@@ -14,7 +14,7 @@ const Navbar = () => {
     await logOut();
   };
   return (
-    <div className="flex justify-around h-[2.5rem] items-center bg-indigo-600 text-white">
+    <div className="flex justify-around w-screen h-[2.5rem] items-center bg-indigo-600 text-white">
       <h1>Welcome to blogging page</h1>
       <div className="flex ">
         {!user ? (

@@ -10,7 +10,7 @@ const HomeBlogs = (props) => {
    console.log(formatDate)
     return (
 
-        <div className="w-[80%] ml-12 mt-0 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="w-[80%] ml-12 mt-3 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         
           <div className="p-4">
             <h2 className="text-xl font-semibold text-gray-800">{props.title}</h2>

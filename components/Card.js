@@ -10,7 +10,7 @@ function Card() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [text, setText] = useState(false);
-  const { user } = userAuthContext();
+  const { user , userData } = userAuthContext();
 
   const postsCollectionRef = collection(db, "Blog");
 
@@ -27,9 +27,9 @@ function Card() {
       description,
       date: currentDate,
       author: {
-        name: user.displayName,
-        id: user.uid,
-        photo: user.photoURL,
+        name: user.displayName || userData.username,
+        id: user.uid || userData.uid,
+        photo: user.photoURL || userData.imageUrl,
       },
     });
     setTitle("");

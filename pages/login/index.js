@@ -96,7 +96,7 @@ router.push('/')
   
             <p className="mt-10 text-center text-sm text-gray-500">
               Not a member?{' '}
-             <Link className="text-indigo-600" href={'/signin'}>Sign Up</Link>
+             <Link className="text-indigo-600" href={'/signup'}>Sign Up</Link>
             </p>
           </div>
         </div>

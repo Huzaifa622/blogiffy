@@ -17,10 +17,7 @@ export default function Home(props) {
   const { blogList } = props;
   console.log(blogList);
   const [blogs, setBlogs] = useState([]);
-  const [allBlogs, setAllBlogs] = useState([]);
-  const [blogsUser, setBlogsUser] = useState([]);
-  const { user , userData } = userAuthContext();
-  console.log(userData)
+  const { user, userData } = userAuthContext();
 
   useEffect(() => {
     if (user) {
@@ -34,7 +31,6 @@ export default function Home(props) {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(userBlogList);
         setBlogs(userBlogList);
       };
       fetchUserBlogs();
@@ -56,33 +52,31 @@ export default function Home(props) {
         <div className=" h-full bg-slate-200 ">
           <h2 className="pl-56 font-bold p-4 text-lg">All Blogs</h2>
           {blogList.map((blog) => (
-            <Link href={`/${blog.id}`} className=" h-full bg-slate-200 mt-4">
-              <HomeBlogs
-                key={blog.id}
-                title={blog.title}
-                description={blog.description}
-                authorname={blog.author.name}
-                date={blog.date}
-                id={blog.id}
-                photo={blog.author.photo}
-              />
-            </Link>
+            <HomeBlogs
+              key={blog.id}
+              title={blog.title}
+              description={blog.description}
+              authorname={blog.author.name}
+              date={blog.date}
+              id={blog.id}
+              photo={blog.author.photo}
+            />
           ))}
         </div>
       ) : (
         <div>
           <div className="w-[100%] pt-8 bg-slate-200 mb-4 h-full ">
-          <Card />
-          {blogs.map((blog) => (
-            <UserBlog
-              title={blog.title}
-              description={blog.description}
-              authorname={blog.author.name}
-              id={blog.id}
-              photo={blog.author.photo }
-              date={blog.date}
-            />
-          ))}
+            <Card />
+            {blogs.map((blog) => (
+              <UserBlog
+                title={blog.title}
+                description={blog.description}
+                authorname={blog.author.name}
+                id={blog.id}
+                photo={blog.author.photo}
+                date={blog.date}
+              />
+            ))}
           </div>
         </div>
       )}
@@ -99,6 +93,6 @@ export async function getStaticProps() {
   blogList = JSON.parse(JSON.stringify(blogList));
   return {
     props: { blogList },
-    revalidate: 10,
+    revalidate: 5,
   };
 }
