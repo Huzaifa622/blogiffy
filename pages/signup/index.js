@@ -48,7 +48,7 @@ export default function SignUp() {
       setImage(imageURL)
     }
 
-    setUserImage(file)
+    setUserImage(file|| null);
   }
   return (
     <>

@@ -8,7 +8,6 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth, database, storage } from "@/utils/firebase";
-import { async } from "@firebase/util";
 import { onValue, ref, set } from "firebase/database";
 import { uploadBytes, ref as stRef, getDownloadURL } from "firebase/storage";
 const AuthContext = createContext();
@@ -33,13 +32,19 @@ export const AuthContextProvider = ({ children }) => {
     return downloadURL;
   }
   async function signup(email, password, username, userImage) {
+    let imageUrl;
     try {
       const authUser = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const imageUrl = await uploadImage(userImage);
+      if(userImage){
+        
+       imageUrl = await uploadImage(userImage);
+      }else{
+       imageUrl = ''
+      }
       set(ref(database, "users/" + authUser.user.uid), {
         email,
         username,
@@ -47,7 +52,8 @@ export const AuthContextProvider = ({ children }) => {
       });
       console.log("success");
     } catch (error) {
-      console.log("not logged in");
+      console.log("not logged in:", error);
+      throw error;
     }
   }
   function login(email, password) {
