@@ -11,6 +11,7 @@ function Card() {
   const [description, setDescription] = useState("");
   const [text, setText] = useState(false);
   const { user , userData } = userAuthContext();
+  console.log(userData)
 
   const postsCollectionRef = collection(db, "Blog");
 
